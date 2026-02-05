@@ -1,42 +1,87 @@
-import React from 'react';
+import React from "react";
 
 const LoanSummary = ({ summary, onClose }) => {
   if (!summary) return null;
 
+  const totalPaid = summary["Total Deposit: "] || 0;
+
+  const remainingBalance = summary["Remaining Balance: "] || 0;
+  const details = summary.loanDetails || {};
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full border-t-4 border-indigo-600">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Loan Analytics</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-red-500 text-2xl">×</button>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-gray-100">
+        {/* Header */}
+        <div className="bg-indigo-600 p-6 text-white flex justify-between items-center">
+          <div>
+            <h2 className="text-xl font-bold">Loan Analytics</h2>
+            <p className="text-indigo-100 text-xs">
+              Customer: {details.customerName}
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-white hover:text-red-200 text-2xl font-bold"
+          >
+            ×
+          </button>
         </div>
-        
-        <div className="space-y-4">
-          <div className="flex justify-between p-3 bg-blue-50 rounded-lg">
-            <span className="text-blue-700 font-bold">Total Paid: </span>
-            <span className="text-blue-900 font-mono">${summary["Total Paid: "]}</span>
+
+        {/* Calculation Cards */}
+        <div className="p-6 space-y-4">
+          <div className="flex justify-between items-center p-4 bg-green-50 rounded-xl border border-green-100">
+            <div>
+              <p className="text-[10px] font-bold text-green-600 uppercase">
+                Total Paid
+              </p>
+              <p className="text-2xl font-black text-green-700">
+                ${totalPaid.toLocaleString()}
+              </p>
+            </div>
+            <div className="bg-green-200 p-2 rounded-full">💰</div>
           </div>
 
-          <div className="flex justify-between p-3 bg-red-50 rounded-lg">
-            <span className="text-red-700 font-bold">Remaining Balance:</span>
-            <span className="text-red-900 font-mono">${summary["Remaining Balance:"]}</span>
+          <div className="flex justify-between items-center p-4 bg-rose-50 rounded-xl border border-rose-100">
+            <div>
+              <p className="text-[10px] font-bold text-rose-600 uppercase">
+                Remaining Balance
+              </p>
+              <p className="text-2xl font-black text-rose-700">
+                ${remainingBalance.toLocaleString()}
+              </p>
+            </div>
+            <div className="bg-rose-200 p-2 rounded-full">📉</div>
           </div>
-          
-          <div className="pt-4 border-t border-dashed">
-            <h4 className="text-xs uppercase text-gray-400 font-bold mb-2">Loan Details</h4>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <p className="text-gray-600">Principal: <span className="text-black font-semibold">${summary.loanDetails.principalAmount}</span></p>
-              <p className="text-gray-600">Interest: <span className="text-black font-semibold">{summary.loanDetails.interestRate}%</span></p>
-              <p className="text-gray-600">Tenure: <span className="text-black font-semibold">{summary.loanDetails.tenureMonths} Mo.</span></p>
-              <p className="text-gray-600">Status: <span className="text-black font-semibold">{summary.loanDetails.status}</span></p>
+
+          {/* Detailed List */}
+          <div className="pt-4 border-t border-dashed space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Principal Amount:</span>
+              <span className="font-semibold text-gray-800">
+                ${details.principalAmount}
+              </span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">EMI Amount:</span>
+              <span className="font-semibold text-indigo-600">
+                ${details.emiAmount}
+              </span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Interest Rate:</span>
+              <span className="font-semibold text-gray-800">
+                {details.interestRate}%
+              </span>
             </div>
           </div>
-        </div>
 
-        <button 
-          onClick={onClose}
-          className="w-full mt-6 bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700 transition"
-        > Close Summary </button>
+          <button
+            onClick={onClose}
+            className="w-full mt-4 bg-gray-900 text-white py-3 rounded-xl font-bold hover:bg-black transition-all"
+          >
+            Close Summary
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -45,6 +45,7 @@ function App() {
   const handleViewSummary = async (id) => {
     try {
       const res = await getSummary(id);
+      console.log(res.data);
       setSummary(res.data);
     } catch {
       alert("Loan Summary not found!");
@@ -63,12 +64,11 @@ function App() {
           </p>
         </header>
 
-        {/* নতুন লোন যোগ করার ফর্ম */}
+        
         <section className="mb-12">
           <LoanForm onRefresh={refreshData} />
         </section>
 
-        {/* লোনের তালিকা */}
         <section>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-bold text-gray-800">Active Loans</h2>
@@ -86,7 +86,6 @@ function App() {
           />
         </section>
 
-        {/* পপ-আপ মডালসমূহ */}
         {summary && (
           <LoanSummary summary={summary} onClose={() => setSummary(null)} />
         )}
