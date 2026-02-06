@@ -1,5 +1,3 @@
-import React from 'react';
-
 const LoanList = ({ loans, onViewSummary, onAddPayment, page, setPage }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden">

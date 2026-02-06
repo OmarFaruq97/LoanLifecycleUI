@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { postPayment } from '../services/api';
 
 const PaymentModal = ({ loanId, onClose, onRefresh }) => {

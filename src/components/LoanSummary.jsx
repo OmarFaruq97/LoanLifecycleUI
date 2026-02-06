@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoanSummary = ({ summary, onClose }) => {
   if (!summary) return null;
 
@@ -71,6 +69,12 @@ const LoanSummary = ({ summary, onClose }) => {
               <span className="text-gray-500">Interest Rate:</span>
               <span className="font-semibold text-gray-800">
                 {details.interestRate}%
+              </span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Tenure Months:</span>
+              <span className="font-semibold text-gray-800">
+                {details.tenureMonths}
               </span>
             </div>
           </div>
