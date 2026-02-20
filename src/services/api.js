@@ -8,3 +8,4 @@ export const getLoans = (page =0) => API.get(`/loans?page=${page}`);
 export const getSummary = (id) => API.get(`/loans/${id}/summary`);
 export const postPayment = (data) => API.post(`/payments`, data);
 export const createLoan = (data) => API.post(`/loans`, data);
+export const getLoan = (data) => API.post(`/loan`, data);
